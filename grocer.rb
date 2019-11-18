@@ -18,13 +18,13 @@ end
 
 def consolidate_cart(cart)
   output = []
-  cart.each do |item|
-    item_name = item.keys[0]
-    if output
-      output[:count] += 1 
+  i=0
+  while i<cart.length
+    if output[i]
+      output[i][:count] += 1 
     else
-      output = item
-      output[:count] = 1 
+      output[i] = cart[i][:item]
+      output[i][:count] = 1 
     end
   end
   output
