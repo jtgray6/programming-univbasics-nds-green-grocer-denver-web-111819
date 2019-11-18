@@ -17,18 +17,17 @@ def find_item_by_name_in_collection(name, collection)
 end
 
 def consolidate_cart(cart)
- result=[]
- counter=Hash.new(0)
- i=0
- while i<cart.length
-  if !find_item_by_name_in_collection(cart[i][:item], counter)
-    counter.!merge(cart[i][:item]: 1)
-  else
-    counter[i][:item]+=1
+  output = {}
+  cart.each do |item|
+    item_name = item.keys[0]
+    if output[item_name]
+      output[item_name][:count] += 1 
+    else
+      output[item_name] = item[item_name]
+      output[item_name][:count] = 1 
+    end
   end
-  i+=1
-  pp counter
-end
+  output
 end
 
 def apply_coupons(cart, coupons)
